@@ -1,0 +1,22 @@
+erDiagram
+    INVESTITOR ||--|{ PORTOFOLIU : detine
+    COMPANIE ||--o{ SIMBOL_BURSIER : emite
+    MONEDA ||--o{ SIMBOL_BURSIER : coteaza_in
+
+    PORTOFOLIU ||--o{ DETINERE_PORTOFOLIU : include
+    SIMBOL_BURSIER ||--o{ DETINERE_PORTOFOLIU : apare_in
+
+    SIMBOL_BURSIER ||--o{ ISTORIC_PRET : are_cotatii
+    EXCHANGE ||--o{ ISTORIC_PRET : raporteaza
+
+    PORTOFOLIU ||--o{ ORDIN : plaseaza
+    SIMBOL_BURSIER ||--o{ ORDIN : vizeaza
+
+    ORDIN ||--o{ EXECUTIE_ORDIN : se_executa_in
+    EXCHANGE ||--o{ EXECUTIE_ORDIN : executa
+
+    PORTOFOLIU ||--o{ TRANZACTIE_NUMERAR : genereaza
+    MONEDA ||--o{ TRANZACTIE_NUMERAR : este_in
+
+    MONEDA ||--o{ CURS_VALUTAR : este_sursa
+    MONEDA ||--o{ CURS_VALUTAR : este_destinatie
