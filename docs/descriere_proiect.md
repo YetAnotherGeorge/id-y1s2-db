@@ -1,4 +1,4 @@
-# Proiect ales: Evidență acțiuni bursiere
+# Proiect ales: Evidenta acțiuni bursiere
 
 ## Tabele
 
@@ -274,7 +274,7 @@ Exemplele vor folosi operatii concurente pe aceeasi detinere si pe aceleasi ordi
 Argumente:
 - ingestie rapida pentru fluxuri mari de cotatii intraday;
 - schema flexibila pentru surse multiple de date de piata;
-- cost redus pentru scrieri intensive time-series.
+- permite sharding pentru scalare orizontala rapida
 
 a) Structura NoSQL (exemplu document):
 - colectie `cotatii_intraday` cu documente: `ticker`, `exchange`, `timestamp`, `open`, `high`, `low`, `close`, `volume`.
