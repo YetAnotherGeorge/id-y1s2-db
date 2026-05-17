@@ -1,0 +1,119 @@
+erDiagram
+    "BURSA - Tabel 01" {
+        int *id_bursa
+        string cod_bursa
+        string denumire
+        string tara
+    }
+
+    "MONEDA - Tabel 02" {
+        string *cod_moneda
+        string denumire
+    }
+
+    "CURS_VALUTAR - Tabel 03" {
+        int *id_curs
+        string cod_moneda_sursa
+        string cod_moneda_dest
+        date data_curs
+        decimal valoare_curs
+    }
+
+    "SIMBOL_BURSIER - Tabel 04" {
+        string *ticker
+        int id_companie
+        string cod_moneda
+        string denumire_simbol
+        string sector
+    }
+
+    "COMPANIE - Tabel 05" {
+        int *id_companie
+        string denumire
+        string cod_fiscal
+        string tara_origine
+    }
+
+    "INVESTITOR - Tabel 06" {
+        int *id_investitor
+        string nume
+        string prenume
+        string email
+    }
+
+    "PORTOFOLIU - Tabel 07" {
+        int *id_portofoliu
+        int id_investitor
+        string nume_portofoliu
+        string activ
+    }
+
+    "DETINERE_PORTOFOLIU - Tabel 08" {
+        int *id_portofoliu
+        string *ticker
+        decimal cantitate
+        decimal pret_mediu
+    }
+
+    "ISTORIC_PRET - Tabel 09" {
+        string *ticker
+        string *data_cotatie
+        int id_bursa
+        float pret_deschidere
+        float pret_inchidere
+        float pret_maxim
+        float pret_minim
+        int volum
+    }
+
+    "ORDIN - Tabel 10" {
+        int *id_ordin
+        int id_portofoliu
+        string ticker
+        string tip_sens
+        string tip_ordin
+        decimal cantitate
+        string status_ordin
+    }
+
+    "EXECUTIE_ORDIN - Tabel 11" {
+        int *id_executie
+        int id_ordin
+        int id_bursa
+        decimal cantitate_executata
+        decimal pret_executie
+        date data_executie
+    }
+
+    "TRANZACTIE_NUMERAR - Tabel 12" {
+        int *id_tranzactie
+        int id_portofoliu
+        string cod_moneda
+        string tip_miscare
+        decimal suma
+        date data_tranzactie
+    }
+
+    "INVESTITOR - Tabel 06" ||--|{ "PORTOFOLIU - Tabel 07" : detine
+    "COMPANIE - Tabel 05" ||--o{ "SIMBOL_BURSIER - Tabel 04" : emite
+
+    "BURSA - Tabel 01" ||--o{ "EXECUTIE_ORDIN - Tabel 11" : executa
+    "BURSA - Tabel 01" ||--o{ "ISTORIC_PRET - Tabel 09" : listeaza
+
+    "MONEDA - Tabel 02" ||--o{ "SIMBOL_BURSIER - Tabel 04" : coteaza_in
+
+    "PORTOFOLIU - Tabel 07" ||--o{ "DETINERE_PORTOFOLIU - Tabel 08" : include
+    "SIMBOL_BURSIER - Tabel 04" ||--o{ "DETINERE_PORTOFOLIU - Tabel 08" : apare_in
+
+    "SIMBOL_BURSIER - Tabel 04" ||--o{ "ISTORIC_PRET - Tabel 09" : are_cotatii
+
+    "PORTOFOLIU - Tabel 07" ||--o{ "ORDIN - Tabel 10" : plaseaza
+    "SIMBOL_BURSIER - Tabel 04" ||--o{ "ORDIN - Tabel 10" : vizeaza
+
+    "ORDIN - Tabel 10" ||--o{ "EXECUTIE_ORDIN - Tabel 11" : se_executa_in
+
+    "PORTOFOLIU - Tabel 07" ||--o{ "TRANZACTIE_NUMERAR - Tabel 12" : genereaza
+    "MONEDA - Tabel 02" ||--o{ "TRANZACTIE_NUMERAR - Tabel 12" : este_in
+
+    "MONEDA - Tabel 02" ||--o{ "CURS_VALUTAR - Tabel 03" : este_sursa
+    "MONEDA - Tabel 02" ||--o{ "CURS_VALUTAR - Tabel 03" : este_destinatie

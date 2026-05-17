@@ -1,5 +1,98 @@
 # Proiect ales: Evidență acțiuni bursiere
 
+## Tabele
+
+- 01: **bursa**
+   - `id_bursa` (Primary Key)
+   - `cod_bursa` (VARCHAR2(10), UNIQUE, NOT NULL) - ex: NYSE, DAX
+   - `denumire` (VARCHAR2(100), NOT NULL)
+   - `tara` (VARCHAR2(50), NOT NULL)
+
+- 02: **moneda**
+   - `cod_moneda` (Primary Key, VARCHAR2(10), NOT NULL) - ex: USD, EUR
+   - `denumire` (VARCHAR2(50), NOT NULL)
+
+- 03: **curs_valutar**
+   - `id_curs` (Primary Key)
+   - `cod_moneda_sursa` (Foreign Key -> moneda.cod_moneda, NOT NULL)
+   - `cod_moneda_dest` (Foreign Key -> moneda.cod_moneda, NOT NULL)
+   - `data_curs` (DATE, NOT NULL)
+   - `valoare_curs` (NUMBER(18,6), NOT NULL, CHECK (valoare_curs > 0))
+   - Constrangere unica: (`cod_moneda_sursa`, `cod_moneda_dest`, `data_curs`)
+
+- 04: **simbol_bursier**
+   - `ticker` (Primary Key, VARCHAR2(10), NOT NULL)
+   - `id_companie` (Foreign Key -> companie.id_companie, NOT NULL)
+   - `cod_moneda` (Foreign Key -> moneda.cod_moneda, NOT NULL)
+   - `denumire_simbol` (VARCHAR2(100), NOT NULL)
+   - `sector` (VARCHAR2(60))
+
+- 05: **companie**
+   - `id_companie` (Primary Key)
+   - `denumire` (VARCHAR2(120), NOT NULL)
+   - `cod_fiscal` (VARCHAR2(30), UNIQUE)
+   - `tara_origine` (VARCHAR2(50), NOT NULL)
+   - `data_listare` (DATE)
+
+- 06: **investitor**
+   - `id_investitor` (Primary Key)
+   - `nume` (VARCHAR2(50), NOT NULL)
+   - `prenume` (VARCHAR2(50), NOT NULL)
+   - `email` (VARCHAR2(120), UNIQUE, NOT NULL)
+   - `data_inregistrare` (DATE, DEFAULT SYSDATE)
+
+- 07: **portofoliu**
+   - `id_portofoliu` (Primary Key)
+   - `id_investitor` (Foreign Key -> investitor.id_investitor, NOT NULL)
+   - `nume_portofoliu` (VARCHAR2(100), NOT NULL)
+   - `data_creare` (DATE, DEFAULT SYSDATE)
+   - `activ` (CHAR(1), DEFAULT 'Y', CHECK (activ IN ('Y','N')))
+
+- 08: **detinere_portofoliu** (tabel asociativ)
+   - `id_portofoliu` (Foreign Key -> portofoliu.id_portofoliu)
+   - `ticker` (Foreign Key -> simbol_bursier.ticker)
+   - `cantitate` (NUMBER(14,4), NOT NULL, CHECK (cantitate >= 0))
+   - `pret_mediu` (NUMBER(14,4), CHECK (pret_mediu >= 0))
+   - `data_actualizare` (DATE, DEFAULT SYSDATE)
+   - Primary Key compus: (`id_portofoliu`, `ticker`)
+
+- 09: **istoric_pret**
+   - `ticker` (Primary Key part, Foreign Key -> simbol_bursier.ticker, NOT NULL)
+   - `data_cotatie` (Primary Key part, VARCHAR2(19), NOT NULL) - de forma YYYY-MM-DD HH:MM:SS
+   - `pret_deschidere` (NUMBER(14,4), CHECK (pret_deschidere > 0))
+   - `pret_inchidere` (NUMBER(14,4), CHECK (pret_inchidere > 0))
+   - `pret_maxim` (NUMBER(14,4), CHECK (pret_maxim > 0))
+   - `pret_minim` (NUMBER(14,4), CHECK (pret_minim > 0))
+   - `volum` (NUMBER, CHECK (volum >= 0))
+   - Primary Key compus: (`ticker`, `data_cotatie`)
+
+- 10: **ordin**
+   - `id_ordin` (Primary Key)
+   - `id_portofoliu` (Foreign Key -> portofoliu.id_portofoliu, NOT NULL)
+   - `ticker` (Foreign Key -> simbol_bursier.ticker, NOT NULL)
+   - `tip_sens` (VARCHAR2(10), CHECK (tip_sens IN ('CUMPARARE','VANZARE')))
+   - `tip_ordin` (VARCHAR2(10), CHECK (tip_ordin IN ('PIATA','LIMITA')))
+   - `cantitate` (NUMBER(14,4), NOT NULL, CHECK (cantitate > 0))
+   - `pret_limita` (NUMBER(14,4))
+   - `data_ordin` (DATE, DEFAULT SYSDATE)
+   - `status_ordin` (VARCHAR2(10), DEFAULT 'NOU', CHECK (status_ordin IN ('NOU','PARTIAL','EXECUTAT','ANULAT')))
+
+- 11: **executie_ordin**
+   - `id_executie` (Primary Key)
+   - `id_ordin` (Foreign Key -> ordin.id_ordin, NOT NULL)
+   - `id_bursa` (Foreign Key -> bursa.id_bursa, NOT NULL)
+   - `cantitate_executata` (NUMBER(14,4), NOT NULL, CHECK (cantitate_executata > 0))
+   - `pret_executie` (NUMBER(14,4), NOT NULL, CHECK (pret_executie > 0))
+   - `data_executie` (DATE, NOT NULL)
+
+- 12: **tranzactie_numerar**
+   - `id_tranzactie` (Primary Key)
+   - `id_portofoliu` (Foreign Key -> portofoliu.id_portofoliu, NOT NULL)
+   - `cod_moneda` (Foreign Key -> moneda.cod_moneda, NOT NULL)
+   - `tip_miscare` (VARCHAR2(15), CHECK (tip_miscare IN ('DEPOZIT','RETRAGERE','COMISION','DIVIDEND')))
+   - `suma` (NUMBER(14,2), NOT NULL, CHECK (suma > 0))
+   - `data_tranzactie` (DATE, DEFAULT SYSDATE)
+
 ## 1) Descrierea modelului real, utilitate, reguli de functionare
 
 Aplicatia modeleaza evidenta actiunilor bursiere pentru investitori individuali. Sistemul pastreaza informatii despre burse, companii listate, simboluri bursiere, preturi istorice, ordine, executii, portofolii si miscari de numerar.
@@ -15,145 +108,33 @@ Reguli de functionare:
 - un portofoliu poate detine mai multe simboluri;
 - un simbol apartine unei companii si are o moneda de referinta;
 - ordinele se emit din portofoliu pentru un simbol si pot avea una sau mai multe executii partiale;
-- preturile istorice se inregistreaza periodic pe perechea (simbol, exchange, moment).
+- preturile istorice se inregistreaza periodic pe perechea (simbol, bursa, moment).
 
 ## 2) Constrangeri (restrictii, reguli)
 
 - toate cheile primare sunt NOT NULL;
-- urmatoarele coduri sunt unice: cod_exchange, ticker, cod_moneda;
+- urmatoarele coduri sunt unice: cod_bursa, ticker, cod_moneda;
 - cantitatile si preturile sunt strict pozitive;
 - tip_sens in ('CUMPARARE','VANZARE');
 - tip_ordin in ('PIATA','LIMITA');
 - status_ordin in ('NOU','PARTIAL','EXECUTAT','ANULAT');
 - data_executie >= data_ordin;
-- pe istoric_pret nu se permit duplicate pentru (ticker, id_exchange, moment_cotatie);
+- pe istoric_pret nu se permit duplicate pentru (ticker, data_cotatie);
 
 ## 3) Entitati (cu cheia primara)
 
-1. exchange (id_exchange)
-2. companie (id_companie)
-3. moneda (cod_moneda)
+1. bursa (id_bursa)
+2. moneda (cod_moneda)
+3. curs_valutar (id_curs)
 4. simbol_bursier (ticker)
-5. investitor (id_investitor)
-6. portofoliu (id_portofoliu)
-7. detinere_portofoliu (id_portofoliu, ticker)  -- tabel asociativ
-8. istoric_pret (id_istoric)
-9. ordin (id_ordin)
-10. executie_ordin (id_executie)
-11. tranzactie_numerar (id_tranzactie)
-12. curs_valutar (id_curs)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Tabele
-
-1. **exchange**
-   - `id_exchange` (Primary Key)
-   - `cod_exchange` (VARCHAR2(10), UNIQUE, NOT NULL) - ex: NYSE, DAX
-   - `denumire` (VARCHAR2(100), NOT NULL)
-   - `tara` (VARCHAR2(50), NOT NULL)
-   - `fus_orar` (VARCHAR2(40))
-
-2. **companie**
-   - `id_companie` (Primary Key)
-   - `denumire` (VARCHAR2(120), NOT NULL)
-   - `cod_fiscal` (VARCHAR2(30), UNIQUE)
-   - `tara_origine` (VARCHAR2(50), NOT NULL)
-   - `data_listare` (DATE)
-
-3. **moneda**
-   - `cod_moneda` (Primary Key, VARCHAR2(10), NOT NULL) - ex: USD, EUR
-   - `denumire` (VARCHAR2(50), NOT NULL)
-
-4. **simbol_bursier**
-   - `ticker` (Primary Key, VARCHAR2(10), NOT NULL)
-   - `id_companie` (Foreign Key -> companie.id_companie, NOT NULL)
-   - `cod_moneda` (Foreign Key -> moneda.cod_moneda, NOT NULL)
-   - `denumire_simbol` (VARCHAR2(100), NOT NULL)
-   - `sector` (VARCHAR2(60))
-
-5. **investitor**
-   - `id_investitor` (Primary Key)
-   - `nume` (VARCHAR2(50), NOT NULL)
-   - `prenume` (VARCHAR2(50), NOT NULL)
-   - `email` (VARCHAR2(120), UNIQUE, NOT NULL)
-   - `data_inregistrare` (DATE, DEFAULT SYSDATE)
-
-6. **portofoliu**
-   - `id_portofoliu` (Primary Key)
-   - `id_investitor` (Foreign Key -> investitor.id_investitor, NOT NULL)
-   - `nume_portofoliu` (VARCHAR2(100), NOT NULL)
-   - `data_creare` (DATE, DEFAULT SYSDATE)
-   - `activ` (CHAR(1), DEFAULT 'Y', CHECK (activ IN ('Y','N')))
-
-7. **detinere_portofoliu** (tabel asociativ)
-   - `id_portofoliu` (Foreign Key -> portofoliu.id_portofoliu)
-   - `ticker` (Foreign Key -> simbol_bursier.ticker)
-   - `cantitate` (NUMBER(14,4), NOT NULL, CHECK (cantitate >= 0))
-   - `pret_mediu` (NUMBER(14,4), CHECK (pret_mediu >= 0))
-   - `data_actualizare` (DATE, DEFAULT SYSDATE)
-   - Primary Key compus: (`id_portofoliu`, `ticker`)
-
-8. **istoric_pret**
-   - `id_istoric` (Primary Key)
-   - `ticker` (Foreign Key -> simbol_bursier.ticker, NOT NULL)
-   - `id_exchange` (Foreign Key -> exchange.id_exchange, NOT NULL)
-   - `moment_cotatie` (TIMESTAMP, NOT NULL)
-   - `pret_deschidere` (NUMBER(14,4), CHECK (pret_deschidere > 0))
-   - `pret_maxim` (NUMBER(14,4), CHECK (pret_maxim > 0))
-   - `pret_minim` (NUMBER(14,4), CHECK (pret_minim > 0))
-   - `pret_inchidere` (NUMBER(14,4), CHECK (pret_inchidere > 0))
-   - `volum` (NUMBER, CHECK (volum >= 0))
-   - Constrangere unica: (`ticker`, `id_exchange`, `moment_cotatie`)
-
-9. **ordin**
-   - `id_ordin` (Primary Key)
-   - `id_portofoliu` (Foreign Key -> portofoliu.id_portofoliu, NOT NULL)
-   - `ticker` (Foreign Key -> simbol_bursier.ticker, NOT NULL)
-   - `tip_sens` (VARCHAR2(10), CHECK (tip_sens IN ('CUMPARARE','VANZARE')))
-   - `tip_ordin` (VARCHAR2(10), CHECK (tip_ordin IN ('PIATA','LIMITA')))
-   - `cantitate` (NUMBER(14,4), NOT NULL, CHECK (cantitate > 0))
-   - `pret_limita` (NUMBER(14,4))
-   - `data_ordin` (DATE, DEFAULT SYSDATE)
-   - `status_ordin` (VARCHAR2(10), DEFAULT 'NOU', CHECK (status_ordin IN ('NOU','PARTIAL','EXECUTAT','ANULAT')))
-
-10. **executie_ordin**
-    - `id_executie` (Primary Key)
-    - `id_ordin` (Foreign Key -> ordin.id_ordin, NOT NULL)
-    - `id_exchange` (Foreign Key -> exchange.id_exchange, NOT NULL)
-    - `cantitate_executata` (NUMBER(14,4), NOT NULL, CHECK (cantitate_executata > 0))
-    - `pret_executie` (NUMBER(14,4), NOT NULL, CHECK (pret_executie > 0))
-    - `data_executie` (DATE, NOT NULL)
-
-11. **tranzactie_numerar**
-    - `id_tranzactie` (Primary Key)
-    - `id_portofoliu` (Foreign Key -> portofoliu.id_portofoliu, NOT NULL)
-   - `cod_moneda` (Foreign Key -> moneda.cod_moneda, NOT NULL)
-    - `tip_miscare` (VARCHAR2(15), CHECK (tip_miscare IN ('DEPOZIT','RETRAGERE','COMISION','DIVIDEND')))
-    - `suma` (NUMBER(14,2), NOT NULL, CHECK (suma > 0))
-    - `data_tranzactie` (DATE, DEFAULT SYSDATE)
-
-12. **curs_valutar**
-    - `id_curs` (Primary Key)
-   - `cod_moneda_sursa` (Foreign Key -> moneda.cod_moneda, NOT NULL)
-   - `cod_moneda_dest` (Foreign Key -> moneda.cod_moneda, NOT NULL)
-    - `data_curs` (DATE, NOT NULL)
-    - `valoare_curs` (NUMBER(18,6), NOT NULL, CHECK (valoare_curs > 0))
-   - Constrangere unica: (`cod_moneda_sursa`, `cod_moneda_dest`, `data_curs`)
+5. companie (id_companie)
+6. investitor (id_investitor)
+7. portofoliu (id_portofoliu)
+8. detinere_portofoliu (id_portofoliu, ticker)  -- tabel asociativ
+9. istoric_pret: Primary Key compus: (ticker, data_cotatie)
+10. ordin (id_ordin)
+11. executie_ordin (id_executie)
+12. tranzactie_numerar (id_tranzactie)
 
 ## 4) Relatii si cardinalitati
 
@@ -162,49 +143,47 @@ Reguli de functionare:
 - moneda 1:N simbol_bursier
 - portofoliu N:M simbol_bursier prin detinere_portofoliu
 - simbol_bursier 1:N istoric_pret
-- exchange 1:N istoric_pret
 - portofoliu 1:N ordin
 - simbol_bursier 1:N ordin
 - ordin 1:N executie_ordin
-- exchange 1:N executie_ordin
+- bursa 1:N executie_ordin
 - portofoliu 1:N tranzactie_numerar
 - moneda 1:N tranzactie_numerar
 - moneda 1:N curs_valutar (sursa)
 - moneda 1:N curs_valutar (destinatie)
 - relatie de tip superior (>2): evaluare zilnica a detinerii pentru tripletul (portofoliu, ticker, data_evaluare), in moneda de raportare
 
-## 5) Atribute importante si constrangeri cheie
+## 5) Atribute importante si constrangeri
 
 - toate cheile primare sunt NOT NULL;
 - `cod_moneda` si `ticker` sunt chei naturale (PK) pentru tabelele `moneda` si `simbol_bursier`;
 - `ticker` este folosit drept FK in `detinere_portofoliu`, `istoric_pret`, `ordin`;
 - `cod_moneda` este folosit drept FK in `simbol_bursier`, `tranzactie_numerar`, `curs_valutar`;
+- `id_bursa` este folosit drept FK in `executie_ordin`;
 - `cantitate > 0` in `ordin` si `executie_ordin`;
 - `cantitate >= 0` in `detinere_portofoliu`;
 - `status_ordin` are domeniu controlat: `NOU`, `PARTIAL`, `EXECUTAT`, `ANULAT`.
 
 ## 6) Diagrama entitate-relatie (ERD)
-
-Se va realiza ulterior, pe baza sectiunilor 3-5.
+In ./erd/erd_relatii.mmd
 
 ## 7) Diagrama conceptuala
-
-Se va realiza ulterior, pe baza sectiunilor 3-5.
+In ./erd/erd_tabele.mmd
 
 ## 8) Scheme relationale
 
-- EXCHANGE(`id_exchange` PK, `cod_exchange` UQ, `denumire`, `tara`, `fus_orar`)
-- COMPANIE(`id_companie` PK, `denumire`, `cod_fiscal` UQ, `tara_origine`, `data_listare`)
+- BURSA(`id_bursa` PK, `cod_bursa` UQ, `denumire`, `tara`)
 - MONEDA(`cod_moneda` PK, `denumire`)
+- CURS_VALUTAR(`id_curs` PK, `cod_moneda_sursa` FK, `cod_moneda_dest` FK, `data_curs`, `valoare_curs`, UQ(`cod_moneda_sursa`,`cod_moneda_dest`,`data_curs`))
 - SIMBOL_BURSIER(`ticker` PK, `id_companie` FK, `cod_moneda` FK, `denumire_simbol`, `sector`)
+- COMPANIE(`id_companie` PK, `denumire`, `cod_fiscal` UQ, `tara_origine`, `data_listare`)
 - INVESTITOR(`id_investitor` PK, `nume`, `prenume`, `email` UQ, `data_inregistrare`)
 - PORTOFOLIU(`id_portofoliu` PK, `id_investitor` FK, `nume_portofoliu`, `data_creare`, `activ`)
 - DETINERE_PORTOFOLIU(`id_portofoliu` PK/FK, `ticker` PK/FK, `cantitate`, `pret_mediu`, `data_actualizare`)
-- ISTORIC_PRET(`id_istoric` PK, `ticker` FK, `id_exchange` FK, `moment_cotatie`, `pret_deschidere`, `pret_maxim`, `pret_minim`, `pret_inchidere`, `volum`, UQ(`ticker`,`id_exchange`,`moment_cotatie`))
+- ISTORIC_PRET(`ticker` PK/FK, `data_cotatie` PK, `pret_deschidere`, `pret_inchidere`, `pret_maxim`, `pret_minim`, `volum`)
 - ORDIN(`id_ordin` PK, `id_portofoliu` FK, `ticker` FK, `tip_sens`, `tip_ordin`, `cantitate`, `pret_limita`, `data_ordin`, `status_ordin`)
-- EXECUTIE_ORDIN(`id_executie` PK, `id_ordin` FK, `id_exchange` FK, `cantitate_executata`, `pret_executie`, `data_executie`)
+- EXECUTIE_ORDIN(`id_executie` PK, `id_ordin` FK, `id_bursa` FK, `cantitate_executata`, `pret_executie`, `data_executie`)
 - TRANZACTIE_NUMERAR(`id_tranzactie` PK, `id_portofoliu` FK, `cod_moneda` FK, `tip_miscare`, `suma`, `data_tranzactie`)
-- CURS_VALUTAR(`id_curs` PK, `cod_moneda_sursa` FK, `cod_moneda_dest` FK, `data_curs`, `valoare_curs`, UQ(`cod_moneda_sursa`,`cod_moneda_dest`,`data_curs`))
 
 ## 9) Normalizare pana la FN3 (FN1-FN3)
 
