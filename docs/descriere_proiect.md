@@ -121,20 +121,49 @@ Reguli de functionare:
 - data_executie >= data_ordin;
 - pe istoric_pret nu se permit duplicate pentru (ticker, data_cotatie);
 
-## 3) Entitati (cu cheia primara)
+## 3) Entitati (cu cheia primara) si descrierea lor
 
-1. bursa (id_bursa)
-2. moneda (cod_moneda)
-3. curs_valutar (id_curs)
-4. simbol_bursier (ticker)
-5. companie (id_companie)
-6. investitor (id_investitor)
-7. portofoliu (id_portofoliu)
-8. detinere_portofoliu (id_portofoliu, ticker)  -- tabel asociativ
-9. istoric_pret: Primary Key compus: (ticker, data_cotatie)
-10. ordin (id_ordin)
-11. executie_ordin (id_executie)
-12. tranzactie_numerar (id_tranzactie)
+### 1. bursa (id_bursa)
+**Descriere**: Exchange-ul unde au loc tranzactiile; Ex: Pentru Romania - BVB (Bursa de valori bucuresti), Pentru Europa: Euronext (Exchange fondat prin combinatia burselor de la Amsterdam, Paris, Bruxelles), 
+NYSE: New York Stock Exchange, etc.
+
+### 2. moneda (cod_moneda)
+**Descriere**: Moneda tranzactionata
+
+### 3. curs_valutar (id_curs)
+**Descriere**: Contine exchange rate-ul dintre monezile listate in moneda
+
+### 4. simbol_bursier (ticker)
+**Descriere**: Simbolul unei companii, garantat unic la nivel de exchange. Yahoo Finance adauga simbolul bursei la final pentru a distinge intre exchange-urile americane si cele straine; Ex: Allianz SE -> ALV.DE, ALV = Autoliv Inc pe NYSE
+
+### 5. companie (id_companie)
+**Descriere**: Detaliile companiei
+
+### 6. investitor (id_investitor)
+**Descriere**: Informatii despre un investitor care are cont in platforma
+
+### 7. portofoliu (id_portofoliu)
+**Descriere**: Contine portofoliile clientilor; Clientii pot avea mai multe portofolii. Portofoliile contin detineri de actiuni specificate in tabelul detinere_portofoliu
+
+### 8. detinere_portofoliu (id_portofoliu, ticker)  -- tabel asociativ
+**Descriere**: Contine o lista de actiuni apartinand unui portofoliu. cantitate = numarul de actiuni, pret_mediu = media preturilor la care au a fost cumparata fiecare actiune
+
+### 9. istoric_pret: Primary Key compus: (ticker, data_cotatie)
+**Descriere**: Contine o lista de istoric preturi pentru fiecare companie: 
+- pret_deschidere: pretul cand s-a deschis bursa
+- pret_inchidere: pretul in momentul in care s-a inchis ziua de tranzactionare
+- pret_maxim/minim: punctele de extrem ale graficului pretului intre deschidere si inchidere
+
+### 10. ordin (id_ordin)
+**Descriere**: Contine lista de ordine create de clienti, de cumparare a unui pachet de actiuni, pe un anumit portofoliu.
+Daca tip_ordin == "PIATA" -> se va incerca cumpararea/vinderea imediata, la orice pret a actiunilor
+Daca tip_ordin == "LIMITA" -> se va incerca cumpararea/vinderea doar la pretul specificat de pret_limita
+
+### 11. executie_ordin (id_executie)
+**Descriere**: Contine lista de executii ale ordinelor, cu pretul efectiv la care au fost cumparate actiunile.
+
+### 12. tranzactie_numerar (id_tranzactie)
+**Descriere**: Daca un client doreste sa schimbe dintr-o moneda in alta, aici sunt inscrise tranzactiile la bursa FOREX (Foreign Exchange Market)
 
 ## 4) Relatii si cardinalitati
 
