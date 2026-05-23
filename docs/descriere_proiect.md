@@ -3,17 +3,17 @@
 ## Tabele
 
 - 01: **bursa**
-   - `id_bursa` (Primary Key)
+   - `id_bursa` # (Primary Key)
    - `cod_bursa` (VARCHAR2(10), UNIQUE, NOT NULL) - ex: NYSE, DAX
    - `denumire` (VARCHAR2(100), NOT NULL)
    - `tara` (VARCHAR2(50), NOT NULL)
 
 - 02: **moneda**
-   - `cod_moneda` (Primary Key, VARCHAR2(10), NOT NULL) - ex: USD, EUR
+   - `cod_moneda` # (Primary Key, VARCHAR2(10), NOT NULL) - ex: USD, EUR
    - `denumire` (VARCHAR2(50), NOT NULL)
 
 - 03: **curs_valutar**
-   - `id_curs` (Primary Key)
+   - `id_curs` # (Primary Key)
    - `cod_moneda_sursa` (Foreign Key -> moneda.cod_moneda, NOT NULL)
    - `cod_moneda_dest` (Foreign Key -> moneda.cod_moneda, NOT NULL)
    - `data_curs` (DATE, NOT NULL)
@@ -21,53 +21,53 @@
    - Constrangere unica: (`cod_moneda_sursa`, `cod_moneda_dest`, `data_curs`)
 
 - 04: **simbol_bursier**
-   - `ticker` (Primary Key, VARCHAR2(10), NOT NULL)
+   - `ticker` # (Primary Key, VARCHAR2(10), NOT NULL)
    - `id_companie` (Foreign Key -> companie.id_companie, NOT NULL)
    - `cod_moneda` (Foreign Key -> moneda.cod_moneda, NOT NULL)
    - `denumire_simbol` (VARCHAR2(100), NOT NULL)
    - `sector` (VARCHAR2(60))
 
 - 05: **companie**
-   - `id_companie` (Primary Key)
+   - `id_companie` # (Primary Key)
    - `denumire` (VARCHAR2(120), NOT NULL)
    - `cod_fiscal` (VARCHAR2(30), UNIQUE)
    - `tara_origine` (VARCHAR2(50), NOT NULL)
    - `data_listare` (DATE)
 
 - 06: **investitor**
-   - `id_investitor` (Primary Key)
+   - `id_investitor` # (Primary Key)
    - `nume` (VARCHAR2(50), NOT NULL)
    - `prenume` (VARCHAR2(50), NOT NULL)
    - `email` (VARCHAR2(120), UNIQUE, NOT NULL)
    - `data_inregistrare` (DATE, DEFAULT SYSDATE)
 
 - 07: **portofoliu**
-   - `id_portofoliu` (Primary Key)
+   - `id_portofoliu` # (Primary Key)
    - `id_investitor` (Foreign Key -> investitor.id_investitor, NOT NULL)
    - `nume_portofoliu` (VARCHAR2(100), NOT NULL)
    - `data_creare` (DATE, DEFAULT SYSDATE)
    - `activ` (CHAR(1), DEFAULT 'Y', CHECK (activ IN ('Y','N')))
 
-- 08: **detinere_portofoliu** (tabel asociativ)
+- 08: **detinere_portofoliu** (*tabel asociativ*)
    - `id_portofoliu` (Foreign Key -> portofoliu.id_portofoliu)
    - `ticker` (Foreign Key -> simbol_bursier.ticker)
    - `cantitate` (NUMBER(14,4), NOT NULL, CHECK (cantitate >= 0))
    - `pret_mediu` (NUMBER(14,4), CHECK (pret_mediu >= 0))
    - `data_actualizare` (DATE, DEFAULT SYSDATE)
-   - Primary Key compus: (`id_portofoliu`, `ticker`)
+   - Primary Key compus: # (`id_portofoliu`, `ticker`)
 
 - 09: **istoric_pret**
    - `ticker` (Primary Key part, Foreign Key -> simbol_bursier.ticker, NOT NULL)
-   - `data_cotatie` (Primary Key part, VARCHAR2(19), NOT NULL) - de forma YYYY-MM-DD HH:MM:SS
+   - `data_cotatie` (Primary Key part, TIMESTAMP, NOT NULL) - de forma YYYY-MM-DD HH:MM:SS
    - `pret_deschidere` (NUMBER(14,4), CHECK (pret_deschidere > 0))
    - `pret_inchidere` (NUMBER(14,4), CHECK (pret_inchidere > 0))
    - `pret_maxim` (NUMBER(14,4), CHECK (pret_maxim > 0))
    - `pret_minim` (NUMBER(14,4), CHECK (pret_minim > 0))
    - `volum` (NUMBER, CHECK (volum >= 0))
-   - Primary Key compus: (`ticker`, `data_cotatie`)
+   - Primary Key compus: # (`ticker`, `data_cotatie`)
 
 - 10: **ordin**
-   - `id_ordin` (Primary Key)
+   - `id_ordin` # (Primary Key)
    - `id_portofoliu` (Foreign Key -> portofoliu.id_portofoliu, NOT NULL)
    - `ticker` (Foreign Key -> simbol_bursier.ticker, NOT NULL)
    - `tip_sens` (VARCHAR2(10), CHECK (tip_sens IN ('CUMPARARE','VANZARE')))
@@ -78,7 +78,7 @@
    - `status_ordin` (VARCHAR2(10), DEFAULT 'NOU', CHECK (status_ordin IN ('NOU','PARTIAL','EXECUTAT','ANULAT')))
 
 - 11: **executie_ordin**
-   - `id_executie` (Primary Key)
+   - `id_executie` # (Primary Key)
    - `id_ordin` (Foreign Key -> ordin.id_ordin, NOT NULL)
    - `id_bursa` (Foreign Key -> bursa.id_bursa, NOT NULL)
    - `cantitate_executata` (NUMBER(14,4), NOT NULL, CHECK (cantitate_executata > 0))
