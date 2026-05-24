@@ -23,6 +23,7 @@
 - 04: **simbol_bursier**
    - `ticker` # (Primary Key, VARCHAR2(10), NOT NULL)
    - `id_companie` (Foreign Key -> companie.id_companie, NOT NULL)
+   - `id_bursa` (Foreign Key -> bursa.id_bursa, NOT NULL)
    - `cod_moneda` (Foreign Key -> moneda.cod_moneda, NOT NULL)
    - `denumire_simbol` (VARCHAR2(100), NOT NULL)
    - `sector` (VARCHAR2(60))
@@ -169,6 +170,7 @@ Daca tip_ordin == "LIMITA" -> se va incerca cumpararea/vinderea doar la pretul s
 
 - investitor 1:N portofoliu
 - companie 1:N simbol_bursier
+- bursa 1:N simbol_bursier
 - moneda 1:N simbol_bursier
 - portofoliu N:M simbol_bursier prin detinere_portofoliu
 - simbol_bursier 1:N istoric_pret
@@ -188,7 +190,7 @@ Daca tip_ordin == "LIMITA" -> se va incerca cumpararea/vinderea doar la pretul s
 - `cod_moneda` si `ticker` sunt chei naturale (PK) pentru tabelele `moneda` si `simbol_bursier`;
 - `ticker` este folosit drept FK in `detinere_portofoliu`, `istoric_pret`, `ordin`;
 - `cod_moneda` este folosit drept FK in `simbol_bursier`, `tranzactie_numerar`, `curs_valutar`;
-- `id_bursa` este folosit drept FK in `executie_ordin`;
+- `id_bursa` este folosit drept FK in `simbol_bursier` si `executie_ordin`;
 - `cantitate > 0` in `ordin` si `executie_ordin`;
 - `cantitate >= 0` in `detinere_portofoliu`;
 - `status_ordin` are domeniu controlat: `NOU`, `PARTIAL`, `EXECUTAT`, `ANULAT`.
@@ -204,7 +206,7 @@ In ./erd/erd_tabele.mmd
 - BURSA(`id_bursa` PK, `cod_bursa` UQ, `denumire`, `tara`)
 - MONEDA(`cod_moneda` PK, `denumire`)
 - CURS_VALUTAR(`id_curs` PK, `cod_moneda_sursa` FK, `cod_moneda_dest` FK, `data_curs`, `valoare_curs`, UQ(`cod_moneda_sursa`,`cod_moneda_dest`,`data_curs`))
-- SIMBOL_BURSIER(`ticker` PK, `id_companie` FK, `cod_moneda` FK, `denumire_simbol`, `sector`)
+- SIMBOL_BURSIER(`ticker` PK, `id_companie` FK, `id_bursa` FK, `cod_moneda` FK, `denumire_simbol`, `sector`)
 - COMPANIE(`id_companie` PK, `denumire`, `cod_fiscal` UQ, `tara_origine`, `data_listare`)
 - INVESTITOR(`id_investitor` PK, `nume`, `prenume`, `email` UQ, `data_inregistrare`)
 - PORTOFOLIU(`id_portofoliu` PK, `id_investitor` FK, `nume_portofoliu`, `data_creare`, `activ`)

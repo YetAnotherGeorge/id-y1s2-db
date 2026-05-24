@@ -8,6 +8,7 @@
 erDiagram
     INVESTITOR ||--|{ PORTOFOLIU : detine
     COMPANIE ||--o{ SIMBOL_BURSIER : emite
+    BURSA ||--o{ SIMBOL_BURSIER : listeaza
     MONEDA ||--o{ SIMBOL_BURSIER : coteaza_in
 
     PORTOFOLIU ||--o{ DETINERE_PORTOFOLIU : include
