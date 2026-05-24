@@ -14,8 +14,8 @@
 
 - 03: **curs_valutar**
    - `id_curs` # (Primary Key)
-   - `cod_moneda_sursa` (Foreign Key -> moneda.cod_moneda, NOT NULL)
-   - `cod_moneda_dest` (Foreign Key -> moneda.cod_moneda, NOT NULL)
+   - `cod_moneda_sursa` (Foreign Key -> moneda.cod_moneda, NOT NULL, VARCHAR2(10))
+   - `cod_moneda_dest` (Foreign Key -> moneda.cod_moneda, NOT NULL, VARCHAR2(10))
    - `data_curs` (DATE, NOT NULL)
    - `valoare_curs` (NUMBER(18,6), NOT NULL, CHECK (valoare_curs > 0))
    - Constrangere unica: (`cod_moneda_sursa`, `cod_moneda_dest`, `data_curs`)

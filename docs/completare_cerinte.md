@@ -40,3 +40,17 @@
     - [_] d\) Exemplificarea comenzilor pentru interogarea datelor, incluzând operațiuni de filtrare și sortare..
 20. [_] Cerință rezervată (flexibilă) pentru alte concepte studiate relevant pentru dezvoltarea aplicațiilor cu suport pentru baze de date.
 
+### Status generare tabele:
+
+[DONE] bursa
+[DONE] moneda
+[DONE] curs_valutar
+[DONE] simbol_bursier
+[DONE] companie
+[DONE] investitor
+[DONE] portofoliu
+[_] detinere_portofoliu
+[DONE] istoric_pret
+[_] ordin
+[_] executie_ordin
+[_] tranzactie_numerar

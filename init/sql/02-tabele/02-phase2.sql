@@ -6,16 +6,7 @@ Cerinta 11: Crearea tabelelor în SQL și inserarea de date coerente în fiecare
    - minimum 10 înregistrări în tabelele asociative; 
    - maxim 30 de înregistrări în fiecare tabel 
 
-Tabel: simbol_bursier
-   - ticker: # 
-   - id_companie: companie.id_companie
-   - cod_moneda: moneda.cod_moneda
-   - denumire_simbol: String
-   - sector: String
-
-Tabel: istoric_pret
-
-Tabel: portofoliu
+Tabele: simbol_bursier, istoric_pret, portofoliu
 */
 
 -- DROP TABLE simbol_bursier CASCADE CONSTRAINTS;
