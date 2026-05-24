@@ -6,6 +6,20 @@ Cerinta 11: Crearea tabelelor în SQL și inserarea de date coerente în fiecare
 */
 
 
+-- CLEANUP
+DROP TABLE executie_ordin CASCADE CONSTRAINTS;
+DROP TABLE detinere_portofoliu CASCADE CONSTRAINTS;
+
+
+-- simulare update pentru ordinele executate
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 10;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 12;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 15;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 3;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 20;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 16;
+COMMIT;
+
 /*
 - 11: **executie_ordin**
    - `id_executie` # (Primary Key)
@@ -30,9 +44,16 @@ CREATE TABLE executie_ordin (
    CONSTRAINT fk_executie_ordin_id_bursa
       FOREIGN KEY (id_bursa)
       REFERENCES bursa(id_bursa)
-)
+);
 DELETE FROM executie_ordin;
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (10, 2, 75.0, 177.16, TO_DATE('2026-02-20', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (12, 8, 76.0, 352.767, TO_DATE('2026-04-28', 'YYYY-MM-DD '));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (15, 11, 42.0, 36.1, TO_DATE('2026-02-05', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (3, 1, 95.0, 40.76, TO_DATE('2026-04-09', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (20, 2, 9.0, 258.762, TO_DATE('2026-01-15', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (16, 11, 39.0, 36.1, TO_DATE('2026-03-10', 'YYYY-MM-DD'));
 COMMIT;
+
 
 
 /*
@@ -64,5 +85,5 @@ CREATE TABLE detinere_portofoliu (
       REFERENCES simbol_bursier (ticker)
 );
 DELETE FROM detinere_portofoliu;
--- TODO: insert statements
+
 COMMIT;

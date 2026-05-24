@@ -7,6 +7,7 @@ Cerinta 11: Crearea tabelelor în SQL și inserarea de date coerente în fiecare
    - maxim 30 de înregistrări în fiecare tabel 
 */
 
+-- CLEANUP:
 DROP TABLE curs_valutar CASCADE CONSTRAINTS;
 DROP TABLE ordin CASCADE CONSTRAINTS;
 /*
@@ -80,29 +81,29 @@ CREATE TABLE ordin (
 
 );
 DELETE FROM ordin;
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'NVO', 'CUMPARARE', 'LIMITA', 12, 40.76, TO_DATE('2026-02-10', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'TLV', 'VANZARE', 'PIATA', 60, 36.1, TO_DATE('2026-04-09', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'NVO', 'VANZARE', 'PIATA', 95, 40.76, TO_DATE('2026-04-09', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'TLV', 'CUMPARARE', 'LIMITA', 25, 36.1, TO_DATE('2026-03-27', 'YYYY-MM-DD'), 'EXECUTAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'AAPL', 'VANZARE', 'LIMITA', 26, 258.762, TO_DATE('2026-03-13', 'YYYY-MM-DD'), 'ANULAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'ALV', 'CUMPARARE', 'LIMITA', 19, 352.767, TO_DATE('2026-03-27', 'YYYY-MM-DD'), 'ANULAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'AAPL', 'CUMPARARE', 'LIMITA', 93, 258.762, TO_DATE('2026-02-28', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'NVO', 'CUMPARARE', 'PIATA', 8, 40.76, TO_DATE('2026-01-16', 'YYYY-MM-DD'), 'ANULAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'NVO', 'CUMPARARE', 'LIMITA', 66, 40.76, TO_DATE('2026-01-25', 'YYYY-MM-DD'), 'ANULAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'NVDA', 'VANZARE', 'PIATA', 75, 177.16, TO_DATE('2026-02-20', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'NVDA', 'VANZARE', 'PIATA', 26, 177.16, TO_DATE('2026-02-04', 'YYYY-MM-DD'), 'EXECUTAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'ALV', 'VANZARE', 'PIATA', 76, 352.767, TO_DATE('2026-04-28', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'ALV', 'CUMPARARE', 'LIMITA', 88, 352.767, TO_DATE('2026-02-27', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'NVDA', 'VANZARE', 'PIATA', 45, 177.16, TO_DATE('2026-02-06', 'YYYY-MM-DD'), 'EXECUTAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'TLV', 'VANZARE', 'PIATA', 42, 36.1, TO_DATE('2026-02-05', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'TLV', 'VANZARE', 'LIMITA', 39, 36.1, TO_DATE('2026-03-08', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'NVDA', 'VANZARE', 'PIATA', 22, 177.16, TO_DATE('2026-01-01', 'YYYY-MM-DD'), 'EXECUTAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'AAPL', 'VANZARE', 'LIMITA', 77, 258.762, TO_DATE('2026-04-28', 'YYYY-MM-DD'), 'EXECUTAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'TLV', 'VANZARE', 'LIMITA', 48, 36.1, TO_DATE('2026-01-06', 'YYYY-MM-DD'), 'ANULAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'AAPL', 'VANZARE', 'LIMITA', 9, 258.762, TO_DATE('2026-01-13', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'NVO', 'VANZARE', 'PIATA', 48, 40.76, TO_DATE('2026-01-12', 'YYYY-MM-DD'), 'PARTIAL');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'ALV', 'VANZARE', 'LIMITA', 56, 352.767, TO_DATE('2026-03-15', 'YYYY-MM-DD'), 'NOU');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'AAPL', 'CUMPARARE', 'LIMITA', 22, 258.762, TO_DATE('2026-03-25', 'YYYY-MM-DD'), 'EXECUTAT');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'NVDA', 'VANZARE', 'PIATA', 37, 177.16, TO_DATE('2026-02-09', 'YYYY-MM-DD'), 'PARTIAL');
-INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'ALV', 'VANZARE', 'LIMITA', 58, 352.767, TO_DATE('2026-04-05', 'YYYY-MM-DD'), 'EXECUTAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'AAPL', 'VANZARE', 'LIMITA', 26, 305.67967715415267, TO_DATE('2026-04-07', 'YYYY-MM-DD'), 'PARTIAL');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'TLV', 'VANZARE', 'LIMITA', 48, 37.152962356972665, TO_DATE('2026-02-28', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'AAPL', 'CUMPARARE', 'PIATA', 64, 270.9538216058397, TO_DATE('2026-03-13', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'TLV', 'VANZARE', 'PIATA', 97, 37.65137212137308, TO_DATE('2026-01-01', 'YYYY-MM-DD'), 'PARTIAL');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'ALV', 'VANZARE', 'PIATA', 69, 375.9760303753835, TO_DATE('2026-03-08', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'NVO', 'VANZARE', 'LIMITA', 33, 42.84663233546247, TO_DATE('2026-03-03', 'YYYY-MM-DD'), 'PARTIAL');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'NVO', 'VANZARE', 'PIATA', 65, 40.59609118924823, TO_DATE('2026-01-05', 'YYYY-MM-DD'), 'EXECUTAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'NVO', 'VANZARE', 'PIATA', 61, 45.47565754680649, TO_DATE('2026-01-22', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'ALV', 'VANZARE', 'PIATA', 97, 336.41396460151236, TO_DATE('2026-03-28', 'YYYY-MM-DD'), 'PARTIAL');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'AAPL', 'VANZARE', 'PIATA', 22, 247.60289718128823, TO_DATE('2026-01-21', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'NVO', 'VANZARE', 'PIATA', 9, 46.84895019023342, TO_DATE('2026-04-05', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'NVDA', 'CUMPARARE', 'LIMITA', 94, 181.93651680493448, TO_DATE('2026-03-23', 'YYYY-MM-DD'), 'ANULAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'ALV', 'CUMPARARE', 'LIMITA', 7, 370.2751159311981, TO_DATE('2026-04-10', 'YYYY-MM-DD'), 'ANULAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'NVDA', 'CUMPARARE', 'LIMITA', 3, 218.77771869519628, TO_DATE('2026-01-11', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'TLV', 'CUMPARARE', 'PIATA', 36, 34.29996657142006, TO_DATE('2026-03-15', 'YYYY-MM-DD'), 'ANULAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (1, 'AAPL', 'CUMPARARE', 'LIMITA', 58, 262.5065538277112, TO_DATE('2026-03-28', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'AAPL', 'CUMPARARE', 'PIATA', 46, 251.63915162699894, TO_DATE('2026-02-05', 'YYYY-MM-DD'), 'EXECUTAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'ALV', 'VANZARE', 'LIMITA', 46, 367.7178450710641, TO_DATE('2026-04-02', 'YYYY-MM-DD'), 'EXECUTAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'TLV', 'CUMPARARE', 'LIMITA', 82, 38.776280304644565, TO_DATE('2026-04-05', 'YYYY-MM-DD'), 'PARTIAL');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (2, 'NVDA', 'VANZARE', 'LIMITA', 63, 179.2382627301148, TO_DATE('2026-03-16', 'YYYY-MM-DD'), 'EXECUTAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (5, 'NVO', 'VANZARE', 'LIMITA', 92, 43.240585103414894, TO_DATE('2026-03-27', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'NVDA', 'CUMPARARE', 'PIATA', 69, 199.8731226215731, TO_DATE('2026-03-22', 'YYYY-MM-DD'), 'NOU');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'ALV', 'VANZARE', 'LIMITA', 13, 391.16210048446743, TO_DATE('2026-03-03', 'YYYY-MM-DD'), 'EXECUTAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (4, 'TLV', 'CUMPARARE', 'LIMITA', 54, 36.99275204433293, TO_DATE('2026-01-09', 'YYYY-MM-DD'), 'EXECUTAT');
+INSERT INTO ordin (id_portofoliu, ticker, tip_sens, tip_ordin, cantitate, pret_limita, data_ordin, status_ordin) VALUES (3, 'NVDA', 'VANZARE', 'PIATA', 50, 208.24301340090284, TO_DATE('2026-04-06', 'YYYY-MM-DD'), 'NOU');
 COMMIT;
