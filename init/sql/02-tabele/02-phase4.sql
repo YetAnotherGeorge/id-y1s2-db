@@ -12,12 +12,22 @@ DROP TABLE detinere_portofoliu CASCADE CONSTRAINTS;
 
 
 -- simulare update pentru ordinele executate
-UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 10;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 8;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 25;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 1;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 11;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 24;
 UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 12;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 2;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 4;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 13;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 9;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 23;
 UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 15;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 5;
+UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 6;
 UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 3;
-UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 20;
-UPDATE ordin SET status_ordin = 'EXECUTAT' WHERE id_ordin = 16;
+
 COMMIT;
 
 /*
@@ -46,12 +56,21 @@ CREATE TABLE executie_ordin (
       REFERENCES bursa(id_bursa)
 );
 DELETE FROM executie_ordin;
-INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (10, 2, 75.0, 177.16, TO_DATE('2026-02-20', 'YYYY-MM-DD'));
-INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (12, 8, 76.0, 352.767, TO_DATE('2026-04-28', 'YYYY-MM-DD '));
-INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (15, 11, 42.0, 36.1, TO_DATE('2026-02-05', 'YYYY-MM-DD'));
-INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (3, 1, 95.0, 40.76, TO_DATE('2026-04-09', 'YYYY-MM-DD'));
-INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (20, 2, 9.0, 258.762, TO_DATE('2026-01-15', 'YYYY-MM-DD'));
-INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (16, 11, 39.0, 36.1, TO_DATE('2026-03-10', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (8, 2, 19.0, 191.9160800532905, TO_DATE('2026-03-28', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (25, 2, 37.0, 171.0402, TO_DATE('2026-01-10', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (1, 2, 51.0, 288.3272, TO_DATE('2026-03-16', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (11, 11, 87.0, 35.416927750876255, TO_DATE('2026-03-03', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (24, 11, 77.0, 38.11321748455487, TO_DATE('2026-03-24', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (12, 8, 21.0, 400.74808348038187, TO_DATE('2026-02-11', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (2, 2, 83.0, 167.59973147823797, TO_DATE('2026-01-29', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (4, 2, 78.0, 189.66940697919074, TO_DATE('2026-03-16', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (13, 11, 37.0, 35.7231, TO_DATE('2026-02-17', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (9, 8, 37.0, 383.4356, TO_DATE('2026-04-14', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (23, 2, 2.0, 275.56936997981103, TO_DATE('2026-04-28', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (15, 1, 28.0, 39.577, TO_DATE('2026-01-07', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (5, 2, 21.0, 39.2575, TO_DATE('2026-02-11', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (6, 1, 33.0, 43.1215, TO_DATE('2026-04-16', 'YYYY-MM-DD'));
+INSERT INTO executie_ordin (id_ordin, id_bursa, cantitate_executata, pret_executie, data_executie) VALUES (3, 2, 23.0, 178.35357565772415, TO_DATE('2026-04-06', 'YYYY-MM-DD'));
 COMMIT;
 
 
@@ -85,5 +104,14 @@ CREATE TABLE detinere_portofoliu (
       REFERENCES simbol_bursier (ticker)
 );
 DELETE FROM detinere_portofoliu;
-
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (1, 'AAPL', 2.0, 275.5694);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (1, 'ALV', 37.0, 383.4356);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (1, 'NVDA', 275.0, 189.02771527272728);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (2, 'TLV', 37.0, 35.7231);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (3, 'NVO', 33.0, 43.1215);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (3, 'TLV', 77.0, 38.1132);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (5, 'ALV', 21.0, 400.7481);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (5, 'NVDA', 37.0, 171.0402);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (5, 'NVO', 28.0, 39.577);
+INSERT INTO detinere_portofoliu (id_portofoliu, ticker, cantitate, pret_mediu) VALUES (5, 'TLV', 87.0, 35.4169);
 COMMIT;
