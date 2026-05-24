@@ -49,8 +49,8 @@
 [DONE] companie
 [DONE] investitor
 [DONE] portofoliu
-[_] detinere_portofoliu
+[DONE] detinere_portofoliu
 [DONE] istoric_pret
-[_] ordin
-[_] executie_ordin
+[DONE] ordin
+[DONE] executie_ordin
 [_] tranzactie_numerar
