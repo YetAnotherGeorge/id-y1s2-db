@@ -17,6 +17,7 @@ Tabele: simbol_bursier, istoric_pret, portofoliu
 CREATE TABLE simbol_bursier (
    ticker VARCHAR2(10) PRIMARY KEY,
    id_companie NUMBER NOT NULL,
+   id_bursa NUMBER NOT NULL,
    cod_moneda VARCHAR2(10) NOT NULL,
    denumire_simbol VARCHAR2(100) NOT NULL,
    sector VARCHAR2(60) NOT NULL,
@@ -27,18 +28,23 @@ CREATE TABLE simbol_bursier (
 
    CONSTRAINT fk_simbol_moneda
       FOREIGN KEY (cod_moneda)
-      REFERENCES moneda(cod_moneda)
+      REFERENCES moneda(cod_moneda),
+
+   CONSTRAINT fk_simbol_bursa
+      FOREIGN KEY (id_bursa)
+      REFERENCES bursa(id_bursa)
 );
 DELETE FROM simbol_bursier;
 
-INSERT INTO simbol_bursier (ticker, id_companie, cod_moneda, denumire_simbol, sector) VALUES ('TLV', 1, 'RON', 'Banca Transilvania', 'Financiar');
-INSERT INTO simbol_bursier (ticker, id_companie, cod_moneda, denumire_simbol, sector) VALUES ('NVDA', 2, 'USD', 'NVIDIA', 'Tehnologie');
-INSERT INTO simbol_bursier (ticker, id_companie, cod_moneda, denumire_simbol, sector) VALUES ('ALV', 3, 'EUR', 'Allianz Group', 'Asigurari');
-INSERT INTO simbol_bursier (ticker, id_companie, cod_moneda, denumire_simbol, sector) VALUES ('NVO', 4, 'USD', 'Novo Nordisk', 'Sanatate');
-INSERT INTO simbol_bursier (ticker, id_companie, cod_moneda, denumire_simbol, sector) VALUES ('AAPL', 5, 'USD', 'Apple', 'Tehnologie');
+INSERT INTO simbol_bursier (ticker, id_companie, id_bursa, cod_moneda, denumire_simbol, sector) VALUES ('TLV', 1, (SELECT id_bursa FROM bursa WHERE cod_bursa = 'BVB'), 'RON', 'Banca Transilvania', 'Financiar');
+INSERT INTO simbol_bursier (ticker, id_companie, id_bursa, cod_moneda, denumire_simbol, sector) VALUES ('NVDA', 2, (SELECT id_bursa FROM bursa WHERE cod_bursa = 'NASDAQ'), 'USD', 'NVIDIA', 'Tehnologie');
+INSERT INTO simbol_bursier (ticker, id_companie, id_bursa, cod_moneda, denumire_simbol, sector) VALUES ('ALV', 3, (SELECT id_bursa FROM bursa WHERE cod_bursa = 'FSE'), 'EUR', 'Allianz Group', 'Asigurari');
+INSERT INTO simbol_bursier (ticker, id_companie, id_bursa, cod_moneda, denumire_simbol, sector) VALUES ('NVO', 4, (SELECT id_bursa FROM bursa WHERE cod_bursa = 'NYSE'), 'USD', 'Novo Nordisk', 'Sanatate');
+INSERT INTO simbol_bursier (ticker, id_companie, id_bursa, cod_moneda, denumire_simbol, sector) VALUES ('AAPL', 5, (SELECT id_bursa FROM bursa WHERE cod_bursa = 'NASDAQ'), 'USD', 'Apple', 'Tehnologie');
 COMMIT;
 
 -- Tabel '09: Istoric Pret' -- 30 de valori vor fi inserate in total, intr-o ordine aleatoare
+-- datele provin din 
 CREATE TABLE istoric_pret (
    ticker VARCHAR2(10) NOT NULL,
    data_cotatie TIMESTAMP NOT NULL, -- data de forma 'YYYY-MM-DD HH24:MI:SS'

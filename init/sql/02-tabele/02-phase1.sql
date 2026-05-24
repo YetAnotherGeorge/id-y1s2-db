@@ -33,6 +33,7 @@ INSERT INTO bursa (cod_bursa, denumire, tara) VALUES ('LSE', 'London Stock Excha
 INSERT INTO bursa (cod_bursa, denumire, tara) VALUES ('FSE', 'Frankfurt Stock Exchange', 'Germania');
 INSERT INTO bursa (cod_bursa, denumire, tara) VALUES ('SIX', 'SIX Swiss Exchange', 'Elvetia');
 INSERT INTO bursa (cod_bursa, denumire, tara) VALUES ('SSE', 'Shanghai Stock Exchange', 'China');
+INSERT INTO bursa (cod_bursa, denumire, tara) VALUES ('BVB', 'Bursa de Valori Bucuresti', 'Romania');
 COMMIT;
 
 
