@@ -14,13 +14,13 @@
 10. [DONE] Crearea unei secvențe ce va fi utilizată în inserarea înregistrărilor în tabele (punctul 11).
 > Rezolvare: init/sql/02-tabele/02-phase0-seq_global_id.sql
 11. [DONE] Crearea tabelelor în SQL și inserarea de date coerente în fiecare dintre acestea (minimum 5 înregistrări în fiecare tabel neasociativ; minimum 10 înregistrări în tabelele asociative; maxim 30 de înregistrări în fiecare tabel). 
-12. [_] Formulați în limbaj natural și implementați 5 cereri SQL complexe ce vor utiliza, în ansamblul lor, următoarele elemente: 
-    - [_] a\) subcereri sincronizate în care intervin cel puțin 3 tabele
-    - [_] b\) subcereri nesincronizate în clauza FROM
-    - [_] c\) grupări de date, funcții grup, filtrare la nivel de grupuri cu subcereri nesincronizate (în clauza de HAVING)
-    - [_] d\) ordonări și utilizarea funcțiilor NVL și DECODE (în cadrul aceleiași cereri)
-    - [_] e\) utilizarea a cel puțin 2 funcții pe șiruri de caractere, 2 funcții pe date calendaristice,  a cel puțin unei expresii CASE
-    - [_] f\) utilizarea a cel puțin 1 bloc de cerere (clauza WITH)
+12. [DONE] Formulați în limbaj natural și implementați 5 cereri SQL complexe ce vor utiliza, în ansamblul lor, următoarele elemente: 
+    - [DONE] a\) subcereri sincronizate în care intervin cel puțin 3 tabele
+    - [DONE] b\) subcereri nesincronizate în clauza FROM
+    - [DONE] c\) grupări de date, funcții grup, filtrare la nivel de grupuri cu subcereri nesincronizate (în clauza de HAVING)
+    - [DONE] d\) ordonări și utilizarea funcțiilor NVL și DECODE (în cadrul aceleiași cereri)
+    - [DONE] e\) utilizarea a cel puțin 2 funcții pe șiruri de caractere, 2 funcții pe date calendaristice,  a cel puțin unei expresii CASE
+    - [DONE] f\) utilizarea a cel puțin 1 bloc de cerere (clauza WITH)
     - Observație: Într-o cerere se vor regăsi mai multe elemente dintre cele enumerate mai sus, astfel încât cele 5 cereri să le cuprindă pe toate. 
 13. [_] Implementarea a 3 operații de actualizare și de suprimare a datelor utilizând subcereri.
 14. [_] Crearea unei vizualizări complexe. Dați un exemplu de operație LMD permisă pe vizualizarea respectivă și un exemplu de operație LMD nepermisă.
