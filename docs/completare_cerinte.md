@@ -7,10 +7,13 @@
 5. [DONE] Descrierea atributelor, incluzând tipul de date și eventualele constrângeri, valori implicite, valori posibile ale atributelor.
 6. [DONE] Realizarea diagramei entitate-relație corespunzătoare descrierii de la punctele 3-5. 
 7. [DONE] Realizarea diagramei conceptuale corespunzătoare diagramei entitate-relație proiectate la punctul 6. Diagrama conceptuală obținută trebuie să conțină minimum 7 tabele (fără considerarea subentităților), dintre care cel puțin un tabel asociativ.
-8. [_] Enumerarea schemelor relaționale corespunzătoare diagramei conceptuale proiectate la punctul 7.
-9. [_] Realizarea normalizării până la forma normală 3 (FN1-FN3).
-10. [_] Crearea unei secvențe ce va fi utilizată în inserarea înregistrărilor în tabele (punctul 11).
-11. [_] Crearea tabelelor în SQL și inserarea de date coerente în fiecare dintre acestea (minimum 5 înregistrări în fiecare tabel neasociativ; minimum 10 înregistrări în tabelele asociative; maxim 30 de înregistrări în fiecare tabel). 
+8. [DONE] Enumerarea schemelor relaționale corespunzătoare diagramei conceptuale proiectate la punctul 7.
+> Rezolvare: Scheme relationale in descriere_proiect.md
+9. [DONE] Realizarea normalizării până la forma normală 3 (FN1-FN3).
+> Rezolvare: Sectiunea 9 din descriere_proiect.md
+10. [DONE] Crearea unei secvențe ce va fi utilizată în inserarea înregistrărilor în tabele (punctul 11).
+> Rezolvare: init/sql/02-tabele/02-phase0-seq_global_id.sql
+11. [DONE] Crearea tabelelor în SQL și inserarea de date coerente în fiecare dintre acestea (minimum 5 înregistrări în fiecare tabel neasociativ; minimum 10 înregistrări în tabelele asociative; maxim 30 de înregistrări în fiecare tabel). 
 12. [_] Formulați în limbaj natural și implementați 5 cereri SQL complexe ce vor utiliza, în ansamblul lor, următoarele elemente: 
     - [_] a\) subcereri sincronizate în care intervin cel puțin 3 tabele
     - [_] b\) subcereri nesincronizate în clauza FROM
@@ -53,4 +56,4 @@
 [DONE] istoric_pret
 [DONE] ordin
 [DONE] executie_ordin
-[_] tranzactie_numerar
+[DONE] tranzactie_numerar

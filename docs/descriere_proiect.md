@@ -218,19 +218,31 @@ In ./erd/erd_tabele.mmd
 
 ## 9) Normalizare pana la FN3 (FN1-FN3)
 
-- Exemplu non-FN1: camp `simboluri_lista` in `ordin` (valoare multipla in acelasi atribut).
-- Transformare FN1: in `ordin` ramane un singur `ticker`; pentru mai multe simboluri se folosesc ordine distincte.
+- FN1: toate atributele din schema curenta sunt atomice, fiecare rand este uniq, fiecare coloana are un nume unic, ordinea in care datele sunt stocate nu conteaza.
+   Exemplu de model non-FN1 evitat: `ordin(simboluri_lista)` cu mai multe valori intr-un singur camp.
+   Implementare corecta: in `ordin` exista un singur `ticker`, iar mai multe simboluri se reprezinta prin randuri distincte.
 
-- Exemplu non-FN2: in `detinere_portofoliu` ar fi adaugat `denumire_companie` (depinde doar de `ticker`).
-- Transformare FN2: `denumire_companie` ramane in `companie`; `detinere_portofoliu` pastreaza doar atribute dependente de cheia compusa (`id_portofoliu`, `ticker`).
+- FN2: Niciun tabel cu o cheie primara compusa nu are coloane care depind doar de o parte din cheia compusa
+   - tabele cu cheie simpla (`bursa`, `moneda`, `companie`, `investitor`, `portofoliu`, `ordin`, `executie_ordin`, `tranzactie_numerar`, `curs_valutar`) sunt automat in FN2 deoarece nu pot avea dependente partiale pe subset de cheie.
+   - tabele cu cheie compusa:
+      - `detinere_portofoliu(id_portofoliu, ticker)`: atributele necheie (`cantitate`, `pret_mediu`, `data_actualizare`) depind de cheia completa (`id_portofoliu`, `ticker`).
+      - `istoric_pret(ticker, data_cotatie)`: atributele necheie (`pret_deschidere`, `pret_inchidere`, `pret_maxim`, `pret_minim`, `volum`) depind de cheia completa (`ticker`, `data_cotatie`).
+   Exemplu de model non-FN2 evitat: adaugarea `denumire_companie` in `detinere_portofoliu` (depinde doar de `ticker`).
 
-- Exemplu non-FN3: in `investitor` s-ar stoca `domeniu_email` derivabil din `email`.
-- Transformare FN3: `domeniu_email` nu se stocheaza, se calculeaza la interogare.
+- FN3: Atributele necheiei depind doar de cheie
+   Exemple de dependente plasate corect pentru a evita tranzitivitatea:
+   - `ticker -> id_companie` este in `simbol_bursier`, iar `id_companie -> denumire` ramane in `companie`.
+   - `id_portofoliu -> id_investitor` este in `portofoliu`, iar datele investitorului (`nume`, `prenume`, `email`) raman in `investitor`.
+   - atribute derivate (ex. `domeniu_email`) nu se stocheaza, se calculeaza la interogare.
+
+=> schema relationala implementata este normalizata pana la forma normala 3 (FN3).
 
 ## 10) Secventa utilizata la inserare
 
 Pentru toate tabelele cu PK numeric se va folosi o secventa comuna:
 - `seq_global_id START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE`
+
+Implementare: `init/sql/02-tabele/02-phase0-seq_global_id.sql`.
 
 Cheile naturale `cod_moneda` si `ticker` se insereaza direct (fara secventa).
 
