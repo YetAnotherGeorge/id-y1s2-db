@@ -23,7 +23,7 @@
     - [DONE] f\) utilizarea a cel puțin 1 bloc de cerere (clauza WITH)
     - Observație: Într-o cerere se vor regăsi mai multe elemente dintre cele enumerate mai sus, astfel încât cele 5 cereri să le cuprindă pe toate. 
 13. [DONE] Implementarea a 3 operații de actualizare și de suprimare a datelor utilizând subcereri.
-14. [_] Crearea unei vizualizări complexe. Dați un exemplu de operație LMD permisă pe vizualizarea respectivă și un exemplu de operație LMD nepermisă.
+14. [DONE] Crearea unei vizualizări complexe. Dați un exemplu de operație LMD permisă pe vizualizarea respectivă și un exemplu de operație LMD nepermisă.
 15. [_] Formulați în limbaj natural și implementați în SQL: 
     - [_] o cerere ce utilizează operația outer-join pe minimum 4 tabele, 
     - [_] o cerere ce utilizează operația division 
