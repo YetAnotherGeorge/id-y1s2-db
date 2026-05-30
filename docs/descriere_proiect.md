@@ -292,10 +292,12 @@ Exemplu LMD nepermis:
 ## 16) Optimizare / plan de executie
 
 Varianta aleasa: 16.b (plan de executie)
-- se analizeaza o cerere complexa din punctul 12;
-- `EXPLAIN PLAN` + `DBMS_XPLAN.DISPLAY`;
-- comparatie intre plan initial si plan dupa adaugarea de indexuri;
-- optional comparatie cu hint-uri (`USE_HASH`, `INDEX`) si justificare.
+- Cerere analizata: bursele la care volumul total (`SUM(ip.volum)`) este peste media globala a volumului pe bursa.
+- Varianta initiala: agregarea volumului pe bursa este calculata de doua ori (in query principal si in subquery).
+- Varianta optimizata: folosire `WITH volum_pe_bursa` pentru a calcula agregarea o singura data si reutilizare in filtrul pe media globala.
+- Obiecte de optimizare folosite: index pe `istoric_pret(ticker)` si index pe `simbol_bursier(id_bursa)` pentru accelerarea join-ului si a gruparii.
+- Planuri comparate: varianta initiala vs varianta optimizata cu indexuri, folosind `EXPLAIN PLAN` si `DBMS_XPLAN.DISPLAY`.
+- Concluzie: varianta optimizata scade timpul de executie
 
 ## 17) BCNF, FN4, FN5 si denormalizare
 

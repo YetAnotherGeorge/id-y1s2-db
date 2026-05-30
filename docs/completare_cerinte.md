@@ -29,9 +29,10 @@
     - [DONE] o cerere ce utilizează operația division 
     - [DONE] și o cerere care implementează analiza top-n.
     - Observație: Cele 3 cereri sunt diferite de cererile de la exercițiul 12.
-16. [_] La alegere: 
+16. [DONE] La alegere: 
     - [_] a\) Optimizarea unei cereri, aplicând regulile de optimizare ce derivă din proprietățile operatorilor algebrei relaționale. Cererea va fi exprimată prin expresie algebrică, arbore algebric și limbaj (SQL), atât anterior cât și ulterior optimizării.
-    - [_] sau b\) Prezentarea planului de execuție a unei cereri complexe, optimizare/compare plan alternativ folosind hint-uri și obiecte specifice optimizării cererilor (spre exemplu indexi).
+    - [DONE] sau b\) Prezentarea planului de execuție a unei cereri complexe, optimizare/compare plan alternativ folosind hint-uri și obiecte specifice optimizării cererilor (spre exemplu indexi).
+    - Rezolvare: init/sql/03-cerinte/ex_16.sql + sectiunea 16 din descriere_proiect.md
 17. 2 Task-uri: 
     - [_] a. Realizarea normalizării BCNF, FN4, FN5.
     - [_] b. Aplicarea denormalizării, justificând necesitatea acesteia.
