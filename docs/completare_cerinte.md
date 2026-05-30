@@ -32,16 +32,17 @@
 16. [DONE] La alegere: 
     - [_] a\) Optimizarea unei cereri, aplicând regulile de optimizare ce derivă din proprietățile operatorilor algebrei relaționale. Cererea va fi exprimată prin expresie algebrică, arbore algebric și limbaj (SQL), atât anterior cât și ulterior optimizării.
     - [DONE] sau b\) Prezentarea planului de execuție a unei cereri complexe, optimizare/compare plan alternativ folosind hint-uri și obiecte specifice optimizării cererilor (spre exemplu indexi).
-    - Rezolvare: init/sql/03-cerinte/ex_16.sql + sectiunea 16 din descriere_proiect.md
+> Rezolvare: init/sql/03-cerinte/ex_16.sql + sectiunea 16 din descriere_proiect.md
 17. 2 Task-uri: 
     - [DONE] a. Realizarea normalizării BCNF, FN4, FN5.
     - [DONE] b. Aplicarea denormalizării, justificând necesitatea acesteia.
-18. [_] Exemplificarea isolation levels prin exemple de tranzacții care se execută în paralel în condiții de concurență, evidențiind efectele diferitelor niveluri de izolare asupra concurenței și integrității datelor.
+18. [DONE] Exemplificarea isolation levels prin exemple de tranzacții care se execută în paralel în condiții de concurență, evidențiind efectele diferitelor niveluri de izolare asupra concurenței și integrității datelor.
+    - Rezolvare: init/sql/03-cerinte/ex_18_01.sql, ex_18_02.sql
 19. [_] Justificarea necesități/utilității migrării la o bază de date de tip NoSql. Identificarea scenariilor în care utilizarea unei baze de date NoSQL este mai avantajoasă decât a unei baze de date relaționale.
     - [_] a\) Prezentarea structurii baze de date de tip NoSql.
     - [_] b\) Prezentarea comenzilor pentru crearea bazei de date (spre exemplu a colecțiilor într-o bază de date de tip document)
     - [_] c\) Prezentarea comenzilor pentru inserarea, modificarea și ștergerea documentelor sau înregistrărilor într-o bază de date NoSQL.
-    - [_] d\) Exemplificarea comenzilor pentru interogarea datelor, incluzând operațiuni de filtrare și sortare..
+    - [_] d\) Exemplificarea comenzilor pentru interogarea datelor, incluzând operațiuni de filtrare și sortare.
 20. [_] Cerință rezervată (flexibilă) pentru alte concepte studiate relevant pentru dezvoltarea aplicațiilor cu suport pentru baze de date.
 
 ### Status generare tabele:
