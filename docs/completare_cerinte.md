@@ -34,8 +34,8 @@
     - [DONE] sau b\) Prezentarea planului de execuție a unei cereri complexe, optimizare/compare plan alternativ folosind hint-uri și obiecte specifice optimizării cererilor (spre exemplu indexi).
     - Rezolvare: init/sql/03-cerinte/ex_16.sql + sectiunea 16 din descriere_proiect.md
 17. 2 Task-uri: 
-    - [_] a. Realizarea normalizării BCNF, FN4, FN5.
-    - [_] b. Aplicarea denormalizării, justificând necesitatea acesteia.
+    - [DONE] a. Realizarea normalizării BCNF, FN4, FN5.
+    - [DONE] b. Aplicarea denormalizării, justificând necesitatea acesteia.
 18. [_] Exemplificarea isolation levels prin exemple de tranzacții care se execută în paralel în condiții de concurență, evidențiind efectele diferitelor niveluri de izolare asupra concurenței și integrității datelor.
 19. [_] Justificarea necesități/utilității migrării la o bază de date de tip NoSql. Identificarea scenariilor în care utilizarea unei baze de date NoSQL este mai avantajoasă decât a unei baze de date relaționale.
     - [_] a\) Prezentarea structurii baze de date de tip NoSql.
