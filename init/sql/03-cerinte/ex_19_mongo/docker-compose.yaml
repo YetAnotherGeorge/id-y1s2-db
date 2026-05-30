@@ -1,0 +1,15 @@
+services:
+  mongo-proiect:
+    image: mongo:7.0.34 
+    restart: unless-stopped
+    container_name: mongodb-proiect
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

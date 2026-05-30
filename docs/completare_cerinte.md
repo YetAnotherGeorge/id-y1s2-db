@@ -38,11 +38,12 @@
     - [DONE] b. Aplicarea denormalizării, justificând necesitatea acesteia.
 18. [DONE] Exemplificarea isolation levels prin exemple de tranzacții care se execută în paralel în condiții de concurență, evidențiind efectele diferitelor niveluri de izolare asupra concurenței și integrității datelor.
     - Rezolvare: init/sql/03-cerinte/ex_18_01.sql, ex_18_02.sql
-19. [_] Justificarea necesități/utilității migrării la o bază de date de tip NoSql. Identificarea scenariilor în care utilizarea unei baze de date NoSQL este mai avantajoasă decât a unei baze de date relaționale.
-    - [_] a\) Prezentarea structurii baze de date de tip NoSql.
-    - [_] b\) Prezentarea comenzilor pentru crearea bazei de date (spre exemplu a colecțiilor într-o bază de date de tip document)
-    - [_] c\) Prezentarea comenzilor pentru inserarea, modificarea și ștergerea documentelor sau înregistrărilor într-o bază de date NoSQL.
-    - [_] d\) Exemplificarea comenzilor pentru interogarea datelor, incluzând operațiuni de filtrare și sortare.
+19. [DONE] Justificarea necesități/utilității migrării la o bază de date de tip NoSql. Identificarea scenariilor în care utilizarea unei baze de date NoSQL este mai avantajoasă decât a unei baze de date relaționale.
+    - [DONE] a\) Prezentarea structurii baze de date de tip NoSql.
+    - [DONE] b\) Prezentarea comenzilor pentru crearea bazei de date (spre exemplu a colecțiilor într-o bază de date de tip document)
+    - [DONE] c\) Prezentarea comenzilor pentru inserarea, modificarea și ștergerea documentelor sau înregistrărilor într-o bază de date NoSQL.
+    - [DONE] d\) Exemplificarea comenzilor pentru interogarea datelor, incluzând operațiuni de filtrare și sortare.
+    - Rezolvare: init/sql/03-cerinte/ex_19_mongo/ex_19_nosql_mongodb.md + init/sql/03-cerinte/ex_19_mongo/docker-compose.yaml
 20. [_] Cerință rezervată (flexibilă) pentru alte concepte studiate relevant pentru dezvoltarea aplicațiilor cu suport pentru baze de date.
 
 ### Status generare tabele:
