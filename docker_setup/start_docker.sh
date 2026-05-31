@@ -14,6 +14,6 @@ docker run -d --name oracle-db-proiect -p 1522:1521 \
 # Conexiune 2:
 #   ADDR: 10.19.49.10:1522 
 #   USER: "proiect"
-#   PAROLA: "parola123"
+#   PAROLA: "poriect"
 #   Service Name: "XE"
 # 
