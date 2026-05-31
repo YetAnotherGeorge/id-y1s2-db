@@ -44,7 +44,7 @@
     - [DONE] c\) Prezentarea comenzilor pentru inserarea, modificarea și ștergerea documentelor sau înregistrărilor într-o bază de date NoSQL.
     - [DONE] d\) Exemplificarea comenzilor pentru interogarea datelor, incluzând operațiuni de filtrare și sortare.
     - Rezolvare: init/sql/03-cerinte/ex_19_mongo/ex_19_nosql_mongodb.md + init/sql/03-cerinte/ex_19_mongo/docker-compose.yaml
-20. [_] Cerință rezervată (flexibilă) pentru alte concepte studiate relevant pentru dezvoltarea aplicațiilor cu suport pentru baze de date.
+20. [DONE] Cerință rezervată (flexibilă) pentru alte concepte studiate relevant pentru dezvoltarea aplicațiilor cu suport pentru baze de date.
 
 ### Status generare tabele:
 
