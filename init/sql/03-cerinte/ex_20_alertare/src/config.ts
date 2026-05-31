@@ -52,14 +52,14 @@ export class OracleDBConfig {
 }
 
 export class Config {
-   dbConnection: OracleDBConfig;
+   oracleDBConfig: OracleDBConfig;
 
    constructor(rawConfig: object | any) {
       if (!rawConfig || typeof rawConfig !== 'object')
          throw new Error('Configuration must be a valid object.');
       if (!rawConfig.dbConnection)
          throw new Error('Configuration must contain a valid dbConnection object.');
-      this.dbConnection = new OracleDBConfig(rawConfig['dbConnection']);
+      this.oracleDBConfig = new OracleDBConfig(rawConfig['dbConnection']);
    }
 
    public static fromJSON(jsonPath: string): Config {
