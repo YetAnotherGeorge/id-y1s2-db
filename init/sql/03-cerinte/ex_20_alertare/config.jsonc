@@ -1,0 +1,13 @@
+{
+   "dbConnection": {
+      "role": "Default", // one of "Default", "SYSDBA"
+      "user": "proiect", // user name
+      "password": "proiect",
+
+      "hostname": "10.19.49.10",
+      "port": 1522,
+
+      "type": "Service Name", // one of "SID", "Service Name"
+      "serviceName": "XE"
+   }
+}
