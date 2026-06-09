@@ -1,10 +1,10 @@
 -- RUN as SYSDBA
 GRANT EXECUTE ON DBMS_ALERT TO proiect;
 
-BEGIN
-	DBMS_ALERT.SIGNAL('ISTORIC_PRET_INS', 'new row inserted');
-END;
-/
+-- BEGIN
+-- 	DBMS_ALERT.SIGNAL('ISTORIC_PRET_INS', 'new row inserted');
+-- END;
+-- /
 
 CREATE OR REPLACE TRIGGER proiect.trg_istoric_pret_alert_ai
 AFTER INSERT ON proiect.istoric_pret

@@ -35,6 +35,8 @@ SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 SELECT id_demo, valoare FROM ex18_test_concurenta WHERE id_demo = 1;
 -- Rezultat asteptat: valoare = 100
 
+-- rulare sesiunea B - pasul 2
+
 -- Sesiunea A (pasul 3)
 SELECT id_demo, valoare FROM ex18_test_concurenta WHERE id_demo = 1;
 -- Rezultat asteptat: valoare = 150 (non-repeatable read)
